@@ -1,17 +1,17 @@
-from core.checkers.all_ import check_all
-from core.parse_condition_items import parse_items
-from core.command_execute import execute_condition
+from core.execute import execute_condition
 
 
 if __name__ == "__main__":
     while True:
         condition = input("Condition: ")
-        text = input("Text: ").lower()
+        text = input("Text: ")
+
+        if not text or not condition:
+            print("Thanks for using!")
+            exit(0)
 
         try:
-            check_all(condition)
-            prepared_condition = parse_items(condition)
-            res = execute_condition(prepared_condition, text)
+            res = execute_condition(condition, text)
             print("Result:", res)
 
         except Exception as err:

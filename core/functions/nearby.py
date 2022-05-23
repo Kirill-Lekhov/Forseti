@@ -22,6 +22,9 @@ class Nearby(BaseFunction):
 		self.arguments = self.arguments.split(" | ")
 
 	def execute(self) -> bool:
+		if not search(self.left_side_argument, self.text):
+			return False
+
 		for part in re_split(self.left_side_argument, self.text):
 			if not part:
 				continue

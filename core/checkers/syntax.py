@@ -3,7 +3,7 @@ from typing import List
 
 _OPERATORS = ("AND", "OR", "NOT", "И", "ИЛИ")
 ERRORS = {
-	"operator_position": "Оператор '{}' используется без {} выражения. Позиция {}",
+	"operator_position": "Operator '{}' is used without expression '{}'. Position {}",
 }
 
 
@@ -25,12 +25,11 @@ def check_syntax(command: str):
 
 			if command_parts[i] == "NOT":
 				if command_parts[i - 1] != "AND":
-					raise SyntaxError("Оператор 'NOT' не может использоваться без оператора 'AND'")
+					raise SyntaxError("Operator 'NOT' cannot be used without operator 'AND'")
 
 			if command_parts[i] in _OPERATORS:
 				if command_parts[i - 1]:
 					pass
-
 
 
 def get_word_start_symbol_num(word_position: int, split_text: List[str]):
