@@ -1,4 +1,5 @@
 from .base import BaseFunction
+from ..exceptions import ForsetiFunctionSyntaxError
 
 from re import search, split as re_split
 
@@ -11,12 +12,12 @@ class Nearby(BaseFunction):
 
 	def check_command(self):
 		if "|nearby" not in self.command:
-			raise SyntaxError("Unsupported command syntax")
+			raise ForsetiFunctionSyntaxError("Unsupported command syntax")
 
 		command_parts = self.command.split(" |nearby ")
 
 		if len(command_parts) != 2:
-			raise SyntaxError("Unsupported command syntax")
+			raise ForsetiFunctionSyntaxError("Unsupported command syntax")
 
 		self.left_side_argument, self.arguments = command_parts
 		self.arguments = self.arguments.split(" | ")
@@ -35,17 +36,3 @@ class Nearby(BaseFunction):
 				return True
 
 		return False
-
-
-if __name__ == "__main__":
-	df = Nearby("some |nearby body | once | told | me", "... some body ...").res
-	print(df)
-
-	df = Nearby("some |nearby body | on | me", "... some once ...").res
-	print(df)
-
-	df = Nearby("some |nearby to[l]?[d]?", "... some told ...").res
-	print(df)
-
-	df = Nearby("some |nearby body | once | told | me", "... some world told ...").res
-	print(df)

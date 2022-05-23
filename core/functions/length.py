@@ -1,4 +1,5 @@
 from .base import BaseFunction
+from ..exceptions import ForsetiFunctionSyntaxError
 
 
 class Length(BaseFunction):
@@ -10,10 +11,10 @@ class Length(BaseFunction):
 
 		if "|ll" == command_prefix or "|lg" == command_prefix:
 			if not self.command[3:].isdigit():
-				raise ValueError("After |ll or |lg construction must be number")
+				raise ForsetiFunctionSyntaxError("After |ll or |lg construction must be number")
 
 		else:
-			raise SyntaxError("Unsupported command syntax")
+			raise ForsetiFunctionSyntaxError("Unsupported command syntax")
 
 	def execute(self) -> bool:
 		if "|ll" in self.command:

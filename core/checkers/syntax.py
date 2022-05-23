@@ -1,5 +1,7 @@
 from typing import List
 
+from ..exceptions import ForsetiSyntaxError
+
 
 _OPERATORS = ("AND", "OR", "NOT", "И", "ИЛИ")
 ERRORS = {
@@ -18,14 +20,14 @@ def check_syntax(command: str):
 			word_start_symbol_num = get_word_start_symbol_num(i, command_parts)
 
 			if i == 0:
-				raise SyntaxError(ERRORS['operator_position'].format(command_parts[i], 'левостороннего', word_start_symbol_num))
+				raise ForsetiSyntaxError(ERRORS['operator_position'].format(command_parts[i], 'левостороннего', word_start_symbol_num))
 
 			elif i == parts_number - 1:
-				raise SyntaxError(ERRORS['operator_position'].format(command_parts[i], 'правостороннего', word_start_symbol_num))
+				raise ForsetiSyntaxError(ERRORS['operator_position'].format(command_parts[i], 'правостороннего', word_start_symbol_num))
 
 			if command_parts[i] == "NOT":
 				if command_parts[i - 1] != "AND":
-					raise SyntaxError("Operator 'NOT' cannot be used without operator 'AND'")
+					raise ForsetiSyntaxError("Operator 'NOT' cannot be used without operator 'AND'")
 
 			if command_parts[i] in _OPERATORS:
 				if command_parts[i - 1]:

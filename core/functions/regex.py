@@ -9,8 +9,3 @@ class Regex(BaseFunction):
 
 	def execute(self) -> bool:
 		return bool(search(self.command, self.text))
-
-
-if __name__ == "__main__":
-	df = Regex("he[l]{1,2}", "hello").res
-	print(df)

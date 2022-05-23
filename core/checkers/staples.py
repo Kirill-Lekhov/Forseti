@@ -1,2 +1,6 @@
+from ..exceptions import ForsetiSyntaxError
+
+
 def check_staples(command: str) -> None:
-	assert command.count('(') == command.count(')'), "No closing/opening brackets"
+	if command.count('(') != command.count(')'):
+		raise ForsetiSyntaxError("No closing/opening brackets")

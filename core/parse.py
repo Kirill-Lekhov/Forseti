@@ -1,4 +1,5 @@
 from typing import List
+from .exceptions import ForsetiSyntaxError
 
 
 def parse_items(condition: str) -> List[List[str]]:
@@ -9,6 +10,9 @@ def parse_items(condition: str) -> List[List[str]]:
 
 	for char in condition:
 		if char == "(":
+			if not stack:
+				raise ForsetiSyntaxError("The closing bracket is met before using the opening one")
+
 			if buffer:
 				stack[-1].append(buffer[:])
 
@@ -20,7 +24,7 @@ def parse_items(condition: str) -> List[List[str]]:
 
 		elif char == ")":
 			if not stack:
-				raise SyntaxError("Закрывающая скобка встречена перед использованием открывающей")
+				raise ForsetiSyntaxError("The closing bracket is met before using the opening one")
 
 			if buffer:
 				stack[-1].append(buffer[:])

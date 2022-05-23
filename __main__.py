@@ -1,4 +1,4 @@
-from core.execute import execute_condition
+from .core.execute import execute_condition
 
 
 if __name__ == "__main__":
@@ -6,7 +6,7 @@ if __name__ == "__main__":
         condition = input("Condition: ")
         text = input("Text: ")
 
-        if not text or not condition:
+        if not any((condition, text)):
             print("Thanks for using!")
             exit(0)
 
