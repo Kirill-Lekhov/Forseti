@@ -17,7 +17,7 @@ class Nearby(BaseFunction):
 		command_parts = self.command.split(" |nearby ")
 
 		if len(command_parts) != 2:
-			raise ForsetiFunctionSyntaxError("Unsupported command syntax")
+			raise ForsetiFunctionSyntaxError("Command doesn't support combined-condition")
 
 		self.left_side_argument, self.arguments = command_parts
 		self.arguments = self.arguments.split(" | ")

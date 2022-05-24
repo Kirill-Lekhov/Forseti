@@ -40,7 +40,3 @@ def parse_items(condition: str) -> List[List[str]]:
 		conditions[0].append(buffer)
 
 	return conditions
-
-
-if __name__ == "__main__":
-	print(parse_items("(True AND False) AND ((True AND False) OR False) AND False"))
