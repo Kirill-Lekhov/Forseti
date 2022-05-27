@@ -2,14 +2,14 @@
 
 The system for determining the compliance of the text with the specified rules
 
-##How to install:
+## How to install:
 
 PyPi installation guide
 ```shell
 pip install forseti-lang
 ```
 
-##How to use:
+## How to use:
 
 ```python
 from forseti_lang.execute import execute_condition
@@ -21,7 +21,7 @@ execute_condition(condition, text)  # False
 
 All regular expressions should be in lowercase.
 
-##Supported logic operators
+## Supported logic operators
 
 ### English
 
@@ -35,7 +35,7 @@ Below is a table of available logical operators and their description.
 | OR                     | Logical **OR**                              | 3        |
 | Atoms (TRUE and FALSE) | Minimum logical unit                        | 4        |
 
-###Russian
+### Russian
 
 Forseti was developed for the analysis of texts in Russian.
 So, you can use:
@@ -45,11 +45,11 @@ So, you can use:
 | И   | AND |
 | ИЛИ | OR  |
 
-####Note
+#### Note
 
 You can combine ru and eng operators.
 
-##Supported functions
+## Supported functions
 
 We really lacked a simple syntax (but regular expressions did not allow us to achieve this), so we created our own
 functions!
@@ -61,7 +61,7 @@ functions!
 | f words nearby   | nearby     | Checks the words that are next to another word            | 7        |
 | f regex search   |            | Checks the occurrence of a regular expression in the text | 8        |
 
-###Explanations
+### Explanations
 
 * `|ll` - length less (in characters)
 * `|lg` - length great (in characters)
@@ -70,7 +70,7 @@ functions!
 * `|N` - alias of `|wN`
 * `|nearby` - the word is nearby to the words `word1 |nearby word2 | word3 | word4`
 
-####Notes
+#### Notes
 
 * All function starts with special character: `|`. That's why we don't support it in regular expressions
 * It is also forbidden to use the `-` character, it is used in the distance function
@@ -86,7 +86,7 @@ result    - False
 * Text length and word distance functions don't work with negative values
 * Nearby and word distance in characters are sensitive to punctuation marks
 
-##Priority table
+## Priority table
 
 | Operator                   | Description                                               | Priority |
 |----------------------------|-----------------------------------------------------------|----------|
@@ -101,9 +101,9 @@ result    - False
 | f regex search             | Checks the occurrence of a regular expression in the text | 8        |
 
 
-##Examples
+## Examples
 
-##Checking the length of the text
+## Checking the length of the text
 
 ```python
 from forseti_lang.execute import execute_condition
@@ -117,7 +117,7 @@ execute_condition(condition, "Hello world!")  # True
 execute_condition(condition, "Hi")  # False
 ```
 
-##Checking the words distance
+## Checking the words distance
 
 ```python
 from forseti_lang.execute import execute_condition
@@ -135,7 +135,7 @@ condition = 'hello |1 world'
 execute_condition(condition, "Hello world!")  # True
 ```
 
-##Checking nearby words
+## Checking nearby words
 
 ```python
 from forseti_lang.execute import execute_condition
@@ -145,7 +145,7 @@ execute_condition(condition, "Hello world!")  # True
 execute_condition(condition, "Hello notalib!")  # True
 ```
 
-##Logic processing
+## Logic processing
 
 ```python
 from forseti_lang.execute import execute_condition
@@ -158,7 +158,7 @@ execute_condition("(TRUE OR FALSE) AND NOT (TRUE AND FALSE)", "") # TRUE
 ```
 
 
-##Difficult rules example
+## Difficult rules example
 * `короб AND NOT короб |2 конфет`
 * `минимальн\w,{,2} |1 стоимо`
 * `балл AND NOT (сн[ия]\w* балл ИЛИ 10\s?балл ИЛИ десять\sбаллов) AND |lg15`
