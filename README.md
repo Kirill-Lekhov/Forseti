@@ -156,3 +156,9 @@ execute_condition("FALSE OR TRUE AND (TRUE OR FALSE)", "") # True
 execute_condition("FALSE OR TRUE AND (FALSE AND TRUE)", "") # False
 execute_condition("(TRUE OR FALSE) AND NOT (TRUE AND FALSE)", "") # TRUE
 ```
+
+
+##Difficult rules example
+* `короб AND NOT короб |2 конфет`
+* `минимальн\w,{,2} |1 стоимо`
+* `балл AND NOT (сн[ия]\w* балл ИЛИ 10\s?балл ИЛИ десять\sбаллов) AND |lg15`
