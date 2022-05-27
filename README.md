@@ -82,9 +82,7 @@ text      - "Hello beautiful world!"
 result    - False
 ```
 * You cannot combine two functions in one expression
-* Nearby only works in one direction
 * Text length and word distance functions don't work with negative values
-* Nearby and word distance in characters are sensitive to punctuation marks
 
 ## Priority table
 
@@ -156,7 +154,6 @@ execute_condition("FALSE OR TRUE AND (TRUE OR FALSE)", "") # True
 execute_condition("FALSE OR TRUE AND (FALSE AND TRUE)", "") # False
 execute_condition("(TRUE OR FALSE) AND NOT (TRUE AND FALSE)", "") # TRUE
 ```
-
 
 ### Difficult rules example
 * `короб AND NOT короб |2 конфет`

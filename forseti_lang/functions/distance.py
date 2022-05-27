@@ -1,7 +1,8 @@
 from .base import BaseFunction
 from ..exceptions import ForsetiFunctionSyntaxError
 
-from re import search, split as re_split
+from typing import Tuple
+from re import search, split as re_split, finditer
 
 
 class Distance(BaseFunction):
@@ -53,14 +54,14 @@ class Distance(BaseFunction):
 		if not self._parts_in_text():
 			return False
 
-		command_parts = re_split(self.left_argument, self.text)[1:]
+		text_by_words = self.text.split()
+		words_number = len(text_by_words)
 
-		for i in command_parts:
-			if search(self.right_argument, i):
-				word_distance = len(re_split(self.right_argument, i)[0].split())
+		for i in range(words_number):
+			text_part = ' '.join(text_by_words[i:i+2+self.distance])
 
-				if word_distance <= self.distance:
-					return not self.f_exclude_right_argument
+			if search(self.left_argument, text_part) and search(self.right_argument, text_part):
+				return True
 
 		return False
 
@@ -68,14 +69,20 @@ class Distance(BaseFunction):
 		if not self._parts_in_text():
 			return False
 
-		command_parts = re_split(self.left_argument, self.text)[1:]
+		def check_pair_distance(pair_1: Tuple[int, int], pair_2: Tuple[int, int]) -> bool:
+			pairs = ((pair_1[0], pair_2[1]), (pair_1[1], pair_2[0]))
 
-		for i in command_parts:
-			if search(self.right_argument, i):
-				word_distance = len(re_split(self.right_argument, i)[0])
+			if max(pairs[0]) - min(pairs[0]) <= self.distance or max(pairs[1]) - min(pairs[1]) <= self.distance:
+				return True
 
-				if word_distance <= self.distance:
-					return not self.f_exclude_right_argument
+			return False
+
+		left_argument_positions = list(map(lambda x: (x.start(), x.end()), finditer(self.left_argument, self.text)))
+		right_argument_positions = list(map(lambda x: (x.start(), x.end()), finditer(self.right_argument, self.text)))
+
+		for i in left_argument_positions:
+			if any(map(lambda x: check_pair_distance(i, x), right_argument_positions)):
+				return True
 
 		return False
 
