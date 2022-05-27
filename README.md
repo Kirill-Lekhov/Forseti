@@ -103,7 +103,7 @@ result    - False
 
 ## Examples
 
-## Checking the length of the text
+### Checking the length of the text
 
 ```python
 from forseti_lang.execute import execute_condition
@@ -117,7 +117,7 @@ execute_condition(condition, "Hello world!")  # True
 execute_condition(condition, "Hi")  # False
 ```
 
-## Checking the words distance
+### Checking the words distance
 
 ```python
 from forseti_lang.execute import execute_condition
@@ -135,7 +135,7 @@ condition = 'hello |1 world'
 execute_condition(condition, "Hello world!")  # True
 ```
 
-## Checking nearby words
+### Checking nearby words
 
 ```python
 from forseti_lang.execute import execute_condition
@@ -145,7 +145,7 @@ execute_condition(condition, "Hello world!")  # True
 execute_condition(condition, "Hello notalib!")  # True
 ```
 
-## Logic processing
+### Logic processing
 
 ```python
 from forseti_lang.execute import execute_condition
@@ -158,7 +158,7 @@ execute_condition("(TRUE OR FALSE) AND NOT (TRUE AND FALSE)", "") # TRUE
 ```
 
 
-## Difficult rules example
+### Difficult rules example
 * `короб AND NOT короб |2 конфет`
 * `минимальн\w,{,2} |1 стоимо`
 * `балл AND NOT (сн[ия]\w* балл ИЛИ 10\s?балл ИЛИ десять\sбаллов) AND |lg15`
