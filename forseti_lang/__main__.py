@@ -1,7 +1,7 @@
-from .core.execute import execute_condition
+from .execute import execute_condition
 
 
-if __name__ == "__main__":
+def start():
     print("Welcome to Forseti! To exit, keep silent twice.")
 
     while True:
@@ -18,3 +18,7 @@ if __name__ == "__main__":
 
         except Exception as err:
             print("Error:", err)
+
+
+if __name__ == "__main__":
+    start()

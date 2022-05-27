@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "forseti_lang"
+version = "1.0.0"
+description = "The system for determining the compliance of the text with the specified rules"
+authors = ["Kirill_Lekhov"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.5"
+
+[tool.poetry.dev-dependencies]
+pytest = "6.1.2"
+
+[tool.poetry.scripts]
+main = "forseti.__main__:start"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

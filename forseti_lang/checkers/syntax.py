@@ -32,6 +32,14 @@ def check_syntax(command: str):
 			if command_parts[i] in _OPERATORS:
 				if command_parts[i - 1]:
 					pass
+		else:
+			if i < parts_number - 1:
+				if command_parts[i + 1].lstrip()[0] == '(' and command_parts[i] not in _OPERATORS:
+					raise ForsetiSyntaxError("You can't use staples without operators")
+
+			if i:
+				if command_parts[i - 1].rstrip()[-1] == ')' and command_parts[i] not in _OPERATORS:
+					raise ForsetiSyntaxError("You can't use staples without operators")
 
 
 def get_word_start_symbol_num(word_position: int, split_text: List[str]):

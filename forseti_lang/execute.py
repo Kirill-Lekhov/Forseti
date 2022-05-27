@@ -2,7 +2,7 @@ from .functions.auto_execute import execute_automatically
 from .parse import parse_items
 from .checkers.all_ import check_all
 
-from typing import List
+from typing import List, Union
 
 
 def execute_condition(condition: str, text: str) -> bool:
@@ -14,7 +14,7 @@ def execute_condition(condition: str, text: str) -> bool:
 	return res
 
 
-def execute_condition_parts(condition_parts: List[List[str]], text: str) -> bool:
+def execute_condition_parts(condition_parts: List[List[Union[str, int]]], text: str) -> bool:
 	text = text.lower()
 	result = False
 
@@ -26,7 +26,7 @@ def execute_condition_parts(condition_parts: List[List[str]], text: str) -> bool
 
 		if i > 0:		# I'm not sure about this condition
 			condition_part_id = find_place_to_insert_result(condition_parts, i)
-			atom_id = condition_parts[condition_part_id].index(f"ATOM_{i}")
+			atom_id = condition_parts[condition_part_id].index(i)
 
 			condition_parts[condition_part_id][atom_id] = _res
 
@@ -65,7 +65,7 @@ def execute_condition_part(condition: str, text: str):
 
 def find_place_to_insert_result(condition_parts: List[List[str]], command_id: int):
 	for i in range(len(condition_parts)):
-		if f"ATOM_{command_id}" in condition_parts[i]:
+		if command_id in condition_parts[i]:
 			return i
 
 	raise IndexError("Can't find command with this id")

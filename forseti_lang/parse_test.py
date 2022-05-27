@@ -19,8 +19,8 @@ def test_parse_items_exceptions(condition):
 @pytest.mark.parametrize(
 	"condition, expected_result",
 	[
-		("TRUE AND ((FALSE))", [['TRUE AND ', 'ATOM_1'], ['ATOM_2'], ['FALSE']]),
-		("TRUE AND FALSE OR (TRUE AND (FALSE OR TRUE))", [['TRUE AND FALSE OR ', 'ATOM_1'], ['TRUE AND ', 'ATOM_2'], ['FALSE OR TRUE']]),
+		("TRUE AND ((FALSE))", [['TRUE AND ', 1], [2], ['FALSE']]),
+		("TRUE AND FALSE OR (TRUE AND (FALSE OR TRUE))", [['TRUE AND FALSE OR ', 1], ['TRUE AND ', 2], ['FALSE OR TRUE']]),
 		("TRUE AND FALSE", [['TRUE AND FALSE']]),
 		("", [[]])
 	]

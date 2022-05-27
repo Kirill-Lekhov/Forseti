@@ -27,6 +27,19 @@ def test_check_syntax_errors(condition):
 @pytest.mark.parametrize(
 	"condition",
 	[
+		"SomeCommand OR SomeCondition (Wrong condition)",
+		"(Wrong condition) SomeCommand OR SomeCondition",
+		"SomeCommand (Wrong condition) SomeCondition",
+	]
+)
+def test_check_syntax_errors(condition):
+	with pytest.raises(ForsetiSyntaxError, match="You can't use staples without operators"):
+		check_syntax(condition)
+
+
+@pytest.mark.parametrize(
+	"condition",
+	[
 		"SomeCommand1 OR NOT SomeCommand2",
 		"SomeCommand1 NOT NOT SomeCommand2",
 		"SomeCommand1 NOT SomeCommand2",

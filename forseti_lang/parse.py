@@ -17,7 +17,7 @@ def parse_items(condition: str) -> List[List[str]]:
 				stack[-1].append(buffer[:])
 
 			stack.append([])
-			stack[-2].append(f"ATOM_{len(conditions)}")
+			stack[-2].append(len(conditions))
 			conditions.append(stack[-1])
 
 			buffer = ""
