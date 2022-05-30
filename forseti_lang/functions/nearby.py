@@ -26,13 +26,19 @@ class Nearby(BaseFunction):
 		if not search(self.left_side_argument, self.text):
 			return False
 
-		for part in re_split(self.left_side_argument, self.text):
-			if not part:
-				continue
+		text_parts = list(map(lambda x: x.strip(), re_split(self.left_side_argument, self.text)))
+		parts_number = len(text_parts)
 
-			nearby_word = part.split()[0]
+		for i in range(parts_number-1):
+			left_side, right_side = "", ""
 
-			if any(map(lambda x: search(x, nearby_word), self.arguments)):
+			if text_parts[i]:
+				left_side = text_parts[i].split()[-1]
+
+			if text_parts[i+1]:
+				right_side = text_parts[i + 1].split()[0]
+
+			if any(map(lambda x: search(x, left_side+right_side), self.arguments)):
 				return True
 
 		return False
