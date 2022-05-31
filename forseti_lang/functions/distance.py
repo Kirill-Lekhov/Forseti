@@ -56,9 +56,10 @@ class Distance(BaseFunction):
 
 		text_by_words = self.text.split()
 		words_number = len(text_by_words)
+		words_in_arguments = len(self.left_argument.split()) + len(self.right_argument.split())
 
 		for i in range(words_number):
-			text_part = ' '.join(text_by_words[i:i+2+self.distance])
+			text_part = ' '.join(text_by_words[i:i+words_in_arguments+self.distance])
 
 			if search(self.left_argument, text_part) and search(self.right_argument, text_part):
 				return True
