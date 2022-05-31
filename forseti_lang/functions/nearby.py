@@ -1,4 +1,5 @@
 from .base import BaseFunction
+from .distance import Distance
 from ..exceptions import ForsetiFunctionSyntaxError
 
 from re import search, split as re_split
@@ -26,13 +27,16 @@ class Nearby(BaseFunction):
 		if not search(self.left_side_argument, self.text):
 			return False
 
-		for part in re_split(self.left_side_argument, self.text):
-			if not part:
-				continue
+		results = []
 
-			nearby_word = part.split()[0]
+		for i in self.arguments:
+			condition = self.left_side_argument + " |w0 " + i
+			results.append(Distance(condition, self.text).res)
 
-			if any(map(lambda x: search(x, nearby_word), self.arguments)):
-				return True
+		return any(results)
 
-		return False
+	def _word_in_left_side(self, left_side_part: str, word: str) -> bool:
+		pass
+
+	def _word_in_right_side(self, right_side_part: str, word: str) -> bool:
+		pass
