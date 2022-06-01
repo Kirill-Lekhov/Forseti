@@ -57,6 +57,7 @@ class Distance(BaseFunction):
 		text_by_words = self.text.split()
 		words_number = len(text_by_words)
 		words_in_arguments = len(self.left_argument.split()) + len(self.right_argument.split())
+		words_in_arguments += self.left_argument.count('\s') + self.right_argument.count('\s')
 
 		for i in range(words_number):
 			text_part = ' '.join(text_by_words[i:i+words_in_arguments+self.distance])
