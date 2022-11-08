@@ -19,7 +19,7 @@ python = "^3.5"
 pytest = "6.1.2"
 
 [tool.poetry.scripts]
-main = "forseti.__main__:start"
+forseti-lang = "forseti.__main__:start"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
