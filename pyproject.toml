@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "forseti-lang"
-version = "1.0.2post1"
+version = "1.0.3"
 description = "The system for determining the compliance of the text with the specified rules"
 authors = ["Kirill_Lekhov <Kirill.Lekhov@mail.ru>"]
 keywords = ["language_processing"]

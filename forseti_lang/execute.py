@@ -37,15 +37,14 @@ def execute_condition_parts(condition_parts: List[List[Union[str, int]]], text: 
 
 
 def execute_condition_part(condition: str, text: str):
-	res = True
-
 	if " AND " in condition:
 		condition_parts = condition.split(" AND ")
 
 		for part in condition_parts:
-			res &= execute_condition_part(part, text)
+			if not execute_condition_part(part, text):
+				return False
 
-		return res
+		return True
 
 	if "NOT " in condition:
 		condition_part = condition.split("NOT ")[1]
@@ -53,12 +52,12 @@ def execute_condition_part(condition: str, text: str):
 
 	if " OR " in condition:
 		condition_parts = condition.split(" OR ")
-		res = False
 
 		for part in condition_parts:
-			res |= execute_condition_part(part, text)
+			if execute_condition_part(part, text):
+				return True
 
-		return res
+		return False
 
 	return execute_automatically(condition, text)
 
