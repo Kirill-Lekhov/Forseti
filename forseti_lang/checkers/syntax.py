@@ -3,7 +3,7 @@ from forseti_lang.exceptions import ForsetiSyntaxError
 from typing import List
 
 
-_OPERATORS = ("AND", "OR", "NOT", "И", "ИЛИ")
+_OPERATORS = ("AND", "OR", "NOT", "И", "ИЛИ", "НЕ")
 ERRORS = {
 	"operator_position": "Operator '{}' is used without expression '{}'. Position {}",
 }
@@ -12,6 +12,7 @@ ERRORS = {
 def check_syntax(command: str):
 	command = command.replace(" И ", " AND ")
 	command = command.replace(" ИЛИ ", " OR ")
+	command = command.replace("НЕ ", "NOT ")
 	command_parts = command.split()
 	parts_number = len(command_parts)
 
