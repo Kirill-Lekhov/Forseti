@@ -1,5 +1,5 @@
-from .length import Length
-from ..exceptions import ForsetiFunctionSyntaxError
+from forseti_lang.functions.length import Length
+from forseti_lang.exceptions import ForsetiFunctionSyntaxError
 
 import pytest
 

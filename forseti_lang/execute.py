@@ -1,6 +1,6 @@
-from .functions.auto_execute import execute_automatically
-from .parse import parse_items
-from .checkers.all_ import check_all
+from forseti_lang.functions.auto_execute import execute_automatically
+from forseti_lang.parse import parse_items
+from forseti_lang.checkers.all_ import check_all
 
 from typing import List, Union
 

@@ -1,6 +1,6 @@
-from .base import BaseFunction
-from .distance import Distance
-from ..exceptions import ForsetiFunctionSyntaxError
+from forseti_lang.functions.base import BaseFunction
+from forseti_lang.functions.distance import Distance
+from forseti_lang.exceptions import ForsetiFunctionSyntaxError
 
 from re import search, split as re_split
 

@@ -1,5 +1,5 @@
-from ..exceptions import ForsetiSyntaxError
-from .syntax import check_syntax
+from forseti_lang.exceptions import ForsetiSyntaxError
+from forseti_lang.checkers.syntax import check_syntax
 
 import pytest
 

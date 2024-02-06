@@ -1,5 +1,6 @@
+from forseti_lang.exceptions import ForsetiSyntaxError
+
 from typing import List
-from .exceptions import ForsetiSyntaxError
 
 
 def parse_items(condition: str) -> List[List[str]]:

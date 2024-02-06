@@ -1,5 +1,5 @@
-from .base import BaseFunction
-from ..exceptions import ForsetiFunctionSyntaxError
+from forseti_lang.functions.base import BaseFunction
+from forseti_lang.exceptions import ForsetiFunctionSyntaxError
 
 from typing import Tuple
 from re import search, split as re_split, finditer

@@ -1,4 +1,4 @@
-from .execute import execute_condition
+from forseti_lang.execute import execute_condition
 
 import pytest
 

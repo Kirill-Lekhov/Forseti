@@ -1,7 +1,7 @@
-from .distance import Distance
-from .length import Length
-from .nearby import Nearby
-from .regex import Regex
+from forseti_lang.functions.distance import Distance
+from forseti_lang.functions.length import Length
+from forseti_lang.functions.nearby import Nearby
+from forseti_lang.functions.regex import Regex
 
 from re import search
 

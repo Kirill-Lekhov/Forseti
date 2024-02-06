@@ -1,6 +1,6 @@
-from typing import List
+from forseti_lang.exceptions import ForsetiSyntaxError
 
-from ..exceptions import ForsetiSyntaxError
+from typing import List
 
 
 _OPERATORS = ("AND", "OR", "NOT", "И", "ИЛИ")

@@ -1,4 +1,4 @@
-from ..exceptions import ForsetiSyntaxError
+from forseti_lang.exceptions import ForsetiSyntaxError
 
 
 def check_staples(command: str) -> None:

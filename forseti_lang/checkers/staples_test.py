@@ -1,5 +1,5 @@
-from ..exceptions import ForsetiSyntaxError
-from .staples import check_staples
+from forseti_lang.exceptions import ForsetiSyntaxError
+from forseti_lang.checkers.staples import check_staples
 
 import pytest
 

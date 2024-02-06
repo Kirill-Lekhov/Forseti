@@ -1,4 +1,4 @@
-from .base import BaseFunction
+from forseti_lang.functions.base import BaseFunction
 
 from re import search
 

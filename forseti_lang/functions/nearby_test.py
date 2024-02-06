@@ -1,5 +1,5 @@
-from .nearby import Nearby
-from ..exceptions import ForsetiFunctionSyntaxError
+from forseti_lang.functions.nearby import Nearby
+from forseti_lang.exceptions import ForsetiFunctionSyntaxError
 
 import pytest
 

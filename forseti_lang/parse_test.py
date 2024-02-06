@@ -1,5 +1,5 @@
-from .parse import parse_items
-from .exceptions import ForsetiSyntaxError
+from forseti_lang.parse import parse_items
+from forseti_lang.exceptions import ForsetiSyntaxError
 
 import pytest
 

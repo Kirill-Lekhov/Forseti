@@ -1,5 +1,5 @@
-from .distance import Distance
-from ..exceptions import ForsetiFunctionSyntaxError
+from forseti_lang.functions.distance import Distance
+from forseti_lang.exceptions import ForsetiFunctionSyntaxError
 
 import pytest
 
