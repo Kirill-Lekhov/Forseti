@@ -1,24 +1,25 @@
-from .execute import execute_condition
+from forseti_lang.execute import execute_condition
+
+from sys import exit
 
 
-def start():
+def main() -> int:
 	print("Welcome to Forseti! To exit, keep silent twice.")
 
 	while True:
 		condition = input("Condition: ")
 		text = input("Text: ")
 
-		if not any((condition, text)):
+		if not condition or not text:
 			print("Thanks for using!")
-			exit(0)
+			return 0
 
 		try:
-			res = execute_condition(condition, text)
-			print("Result:", res)
+			print("Result:", execute_condition(condition, text))
 
 		except Exception as err:
 			print("Error:", err)
 
 
 if __name__ == "__main__":
-	start()
+	exit(main())
