@@ -14,16 +14,16 @@ def check_syntax(command: str):
 	command = command.replace(" ИЛИ ", " OR ")
 	command = command.replace("НЕ ", "NOT ")
 	command_parts = command.split()
-	parts_number = len(command_parts)
+	parts_count = len(command_parts)
 
-	for i in range(parts_number):
+	for i in range(parts_count):
 		if command_parts[i] in _OPERATORS:
 			word_start_symbol_num = get_word_start_symbol_num(i, command_parts)
 
 			if i == 0:
 				raise ForsetiSyntaxError(ERRORS['operator_position'].format(command_parts[i], 'left-side', word_start_symbol_num))
 
-			elif i == parts_number - 1:
+			elif i == parts_count - 1:
 				raise ForsetiSyntaxError(ERRORS['operator_position'].format(command_parts[i], 'right-side', word_start_symbol_num))
 
 			if command_parts[i] == "NOT":
@@ -34,7 +34,7 @@ def check_syntax(command: str):
 				if command_parts[i - 1]:
 					pass
 		else:
-			if i < parts_number - 1:
+			if i < parts_count - 1:
 				if command_parts[i + 1].lstrip()[0] == '(' and command_parts[i] not in _OPERATORS:
 					raise ForsetiSyntaxError("You can't use staples without operators")
 
