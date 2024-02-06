@@ -1,13 +1,11 @@
 from forseti_lang.exceptions import ForsetiSyntaxError
+from forseti_lang.types import ConditionParts
 
-from typing import List
 
-
-def parse_items(condition: str) -> List[List[str]]:
+def parse_items(condition: str) -> ConditionParts:
 	buffer = ""
 	stack = [[]]
-	conditions = list()
-	conditions.append(stack[-1])
+	conditions = [stack[-1]]
 
 	for char in condition:
 		if char == "(":

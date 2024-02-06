@@ -1,22 +1,18 @@
 from forseti_lang.functions.auto_execute import execute_automatically
-from forseti_lang.parse import parse_items
-from forseti_lang.checkers.all_ import check_all
+from forseti_lang.preparing import prepare_condition
+from forseti_lang.types import ConditionParts
 
 from typing import List, Union
 
 
 def execute_condition(condition: str, text: str, check: bool = True) -> bool:
-	if check:
-		check_all(condition)
-
-	condition = condition.replace(" И ", " AND ").replace(" ИЛИ ", " OR ").replace("НЕ ", "NOT ")
-	condition_parts = parse_items(condition)
+	condition_parts = prepare_condition(condition, check)
 	res = execute_condition_parts(condition_parts, text)
 
 	return res
 
 
-def execute_condition_parts(condition_parts: List[List[Union[str, int]]], text: str) -> bool:
+def execute_condition_parts(condition_parts: ConditionParts, text: str) -> bool:
 	text = text.lower()
 	result = False
 
