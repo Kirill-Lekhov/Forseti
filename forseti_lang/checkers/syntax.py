@@ -21,10 +21,10 @@ def check_syntax(command: str):
 			word_start_symbol_num = get_word_start_symbol_num(i, command_parts)
 
 			if i == 0:
-				raise ForsetiSyntaxError(ERRORS['operator_position'].format(command_parts[i], 'левостороннего', word_start_symbol_num))
+				raise ForsetiSyntaxError(ERRORS['operator_position'].format(command_parts[i], 'left-side', word_start_symbol_num))
 
 			elif i == parts_number - 1:
-				raise ForsetiSyntaxError(ERRORS['operator_position'].format(command_parts[i], 'правостороннего', word_start_symbol_num))
+				raise ForsetiSyntaxError(ERRORS['operator_position'].format(command_parts[i], 'right-side', word_start_symbol_num))
 
 			if command_parts[i] == "NOT":
 				if command_parts[i - 1] != "AND":
