@@ -7,7 +7,7 @@ from typing import List, Union
 
 def execute_condition(condition: str, text: str) -> bool:
 	check_all(condition)
-	condition = condition.replace(" И ", " AND ").replace(" ИЛИ ", " OR ")
+	condition = condition.replace(" И ", " AND ").replace(" ИЛИ ", " OR ").replace("НЕ ", "NOT ")
 	condition_parts = parse_items(condition)
 	res = execute_condition_parts(condition_parts, text)
 
