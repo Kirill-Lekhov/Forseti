@@ -1,2 +1,2 @@
-from .staples import check_staples
+from .parenthesis import check_parentheses
 from .syntax import check_syntax

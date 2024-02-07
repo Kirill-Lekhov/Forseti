@@ -49,8 +49,8 @@ def check_operator(operator: str, adjacent_parts: Tuple[Optional[str], Optional[
 def check_parenthesis(parenthesis: str, adjacent_parts: Tuple[Optional[str], Optional[str]]) -> None:
 	if adjacent_parts[0]:
 		if adjacent_parts[0].rstrip()[-1] == CLOSE_PARENTHESIS and parenthesis not in OPERATORS:
-			raise ForsetiSyntaxError("You can't use staples without operators")
+			raise ForsetiSyntaxError("You can't use parentheses without operators")
 
 	if adjacent_parts[1]:
 		if adjacent_parts[1].lstrip()[0] == OPEN_PARENTHESIS and parenthesis not in OPERATORS:
-			raise ForsetiSyntaxError("You can't use staples without operators")
+			raise ForsetiSyntaxError("You can't use parentheses without operators")

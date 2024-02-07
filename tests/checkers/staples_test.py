@@ -1,5 +1,5 @@
 from forseti_lang.exceptions import ForsetiSyntaxError
-from forseti_lang.checkers.staples import check_staples
+from forseti_lang.checkers.parenthesis import check_parentheses
 
 import pytest
 
@@ -11,9 +11,9 @@ import pytest
 		"(True))",
 	]
 )
-def test_check_staples_errors(condition):
+def test_check_parentheses_errors(condition):
 	with pytest.raises(ForsetiSyntaxError):
-		check_staples(condition)
+		check_parentheses(condition)
 
 
 @pytest.mark.parametrize(
@@ -25,5 +25,5 @@ def test_check_staples_errors(condition):
 		"(True OR False) AND (False AND True)",
 	]
 )
-def test_check_staples_results(condition):
-	assert check_staples(condition) is None
+def test_check_parentheses_results(condition):
+	assert check_parentheses(condition) is None

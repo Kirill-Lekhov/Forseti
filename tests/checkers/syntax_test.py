@@ -33,7 +33,7 @@ def test_check_syntax_errors(condition):
 	]
 )
 def test_check_syntax_errors(condition):
-	with pytest.raises(ForsetiSyntaxError, match="You can't use staples without operators"):
+	with pytest.raises(ForsetiSyntaxError, match="You can't use parentheses without operators"):
 		check_syntax(condition)
 
 
@@ -45,6 +45,6 @@ def test_check_syntax_errors(condition):
 		"SomeCommand1 NOT SomeCommand2",
 	]
 )
-def test_check_staples_errors(condition):
+def test_check_parentheses_errors(condition):
 	with pytest.raises(ForsetiSyntaxError, match="Operator 'NOT' cannot be used without operator 'AND'"):
 		check_syntax(condition)
