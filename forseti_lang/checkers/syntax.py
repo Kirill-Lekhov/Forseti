@@ -1,49 +1,56 @@
 from forseti_lang.exceptions import ForsetiSyntaxError
+from forseti_lang.condition import replace_ru_statements
+from forseti_lang.operator import OPERATORS, AND, NOT, OR, OPEN_PARENTHESIS, CLOSE_PARENTHESIS, BINARY_OPERATORS
 
-from typing import List
+from typing import List, Tuple, Optional
 
-
-_OPERATORS = ("AND", "OR", "NOT", "И", "ИЛИ", "НЕ")
 ERRORS = {
-	"operator_position": "Operator '{}' is used without expression '{}'. Position {}",
+	"operator_position": "Operator '{}' is used without expression '{}'",
 }
 
 
-def check_syntax(command: str):
-	command = command.replace(" И ", " AND ")
-	command = command.replace(" ИЛИ ", " OR ")
-	command = command.replace("НЕ ", "NOT ")
-	command_parts = command.split()
-	parts_count = len(command_parts)
+def check_syntax(command: str) -> None:
+	parts = replace_ru_statements(command).split()
+	parts_count = len(parts)
+
+	if not parts:
+		return
+
+	if parts[0] in OPERATORS:
+		raise ForsetiSyntaxError(ERRORS['operator_position'].format(parts[0], 'left-side'))
+
+	if parts[-1] in OPERATORS:
+		raise ForsetiSyntaxError(ERRORS['operator_position'].format(parts[-1], 'right-side'))
 
 	for i in range(parts_count):
-		if command_parts[i] in _OPERATORS:
-			word_start_symbol_num = get_word_start_symbol_num(i, command_parts)
+		part = parts[i]
+		left_neighbor = parts[i-1] if i else None
+		right_neighbor = parts[i+1] if i < parts_count - 1 else None
 
-			if i == 0:
-				raise ForsetiSyntaxError(ERRORS['operator_position'].format(command_parts[i], 'left-side', word_start_symbol_num))
-
-			elif i == parts_count - 1:
-				raise ForsetiSyntaxError(ERRORS['operator_position'].format(command_parts[i], 'right-side', word_start_symbol_num))
-
-			if command_parts[i] == "NOT":
-				if command_parts[i - 1] != "AND":
-					raise ForsetiSyntaxError("Operator 'NOT' cannot be used without operator 'AND'")
-
-			if command_parts[i] in _OPERATORS:
-				if command_parts[i - 1]:
-					pass
+		if part in OPERATORS:
+			check_operator(part, (left_neighbor, right_neighbor))
 		else:
-			if i < parts_count - 1:
-				if command_parts[i + 1].lstrip()[0] == '(' and command_parts[i] not in _OPERATORS:
-					raise ForsetiSyntaxError("You can't use staples without operators")
-
-			if i:
-				if command_parts[i - 1].rstrip()[-1] == ')' and command_parts[i] not in _OPERATORS:
-					raise ForsetiSyntaxError("You can't use staples without operators")
+			check_parenthesis(part, (left_neighbor, right_neighbor))
 
 
-def get_word_start_symbol_num(word_position: int, split_text: List[str]):
-	word_start_symbol_num = sum(map(len, split_text[:word_position])) + word_position
+def check_operator(operator: str, adjacent_parts: Tuple[Optional[str], Optional[str]]) -> None:
+	if operator == NOT:
+		if adjacent_parts[0] != AND:
+			raise ForsetiSyntaxError("Operator 'NOT' cannot be used without operator 'AND'")
 
-	return word_start_symbol_num + 1
+	if operator in BINARY_OPERATORS:
+		if adjacent_parts[0] in BINARY_OPERATORS or adjacent_parts[1] in BINARY_OPERATORS:
+			raise ForsetiSyntaxError(f"Binary operator {operator} cannot be used together with binary operator")
+
+	else:
+		raise NotImplementedError(f"Check of the '{operator}' operator is not implemented")
+
+
+def check_parenthesis(parenthesis: str, adjacent_parts: Tuple[Optional[str], Optional[str]]) -> None:
+	if adjacent_parts[0]:
+		if adjacent_parts[0].rstrip()[-1] == CLOSE_PARENTHESIS and parenthesis not in OPERATORS:
+			raise ForsetiSyntaxError("You can't use staples without operators")
+
+	if adjacent_parts[1]:
+		if adjacent_parts[1].lstrip()[0] == OPEN_PARENTHESIS and parenthesis not in OPERATORS:
+			raise ForsetiSyntaxError("You can't use staples without operators")
