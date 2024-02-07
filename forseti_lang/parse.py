@@ -1,5 +1,6 @@
 from forseti_lang.exceptions import ForsetiSyntaxError
 from forseti_lang.types import ConditionParts
+from forseti_lang.operator import OPEN_PARENTHESIS, CLOSE_PARENTHESIS
 
 
 def parse_items(condition: str) -> ConditionParts:
@@ -8,7 +9,7 @@ def parse_items(condition: str) -> ConditionParts:
 	conditions = [stack[-1]]
 
 	for char in condition:
-		if char == "(":
+		if char == OPEN_PARENTHESIS:
 			if not stack:
 				raise ForsetiSyntaxError("The closing bracket is met before using the opening one")
 
@@ -21,7 +22,7 @@ def parse_items(condition: str) -> ConditionParts:
 
 			buffer = ""
 
-		elif char == ")":
+		elif char == CLOSE_PARENTHESIS:
 			if not stack:
 				raise ForsetiSyntaxError("The closing bracket is met before using the opening one")
 

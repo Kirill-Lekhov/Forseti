@@ -2,15 +2,16 @@ from forseti_lang.functions.distance import Distance
 from forseti_lang.functions.length import Length
 from forseti_lang.functions.nearby import Nearby
 from forseti_lang.functions.regex import Regex
+from forseti_lang.operator import TRUE, FALSE
 
 from re import search
 
 
 def execute_automatically(command: str, text: str) -> bool:
-	if command == "TRUE":		# ATOM
+	if command == TRUE:
 		return True
 
-	elif command == "FALSE": 	# ATOM
+	elif command == FALSE:
 		return False
 
 	elif "|l" in command:

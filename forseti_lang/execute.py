@@ -1,6 +1,7 @@
 from forseti_lang.functions.auto_execute import execute_automatically
 from forseti_lang.preparing import prepare_condition
 from forseti_lang.types import ConditionParts
+from forseti_lang.operator import TRUE, FALSE
 
 from typing import List, Union
 
@@ -20,7 +21,7 @@ def execute_condition_parts(condition_parts: ConditionParts, text: str) -> bool:
 		part = condition_parts[i]
 		condition = part[0] if len(part) == 1 else "".join(part)
 
-		_res = "TRUE" if execute_condition_part(condition, text) else "FALSE"		# Converts to atomic
+		_res = TRUE if execute_condition_part(condition, text) else FALSE		# Converts to atomic
 
 		if i > 0:		# I'm not sure about this condition
 			condition_part_id = find_place_to_insert_result(condition_parts, i)
